@@ -14,6 +14,26 @@ export default class IndexContainer extends Component {
             clicked1: 'none',
             clicked2: 'none',
         };
+
+        this.icons = [{
+            iconName: 'mail',
+            title: '发邮件'
+        }, {
+            iconName: 'message',
+            title: '发短信'
+        }, {
+            iconName: 'team',
+            title: '发送到群'
+        }, {
+            iconName: 'download',
+            title: '下载'
+        }, {
+            iconName: 'delete',
+            title: '删除'
+        }, {
+            iconName: 'ellipsis',
+            title: '更多'
+        }];
     }
 
     componentDidMount() {
@@ -75,26 +95,6 @@ export default class IndexContainer extends Component {
             });
         });
     }
-
-    icons: [{
-        iconName: 'mail',
-        title: '发邮件'
-    }, {
-        iconName: 'message',
-        title: '发短信'
-    }, {
-        iconName: 'team',
-        title: '发送到群'
-    }, {
-        iconName: 'download',
-        title: '下载'
-    }, {
-        iconName: 'delete',
-        title: '删除'
-    }, {
-        iconName: 'ellipsis',
-        title: '更多'
-    }]
 
     render() {
         const { welcome } = this.props.IndexState;
