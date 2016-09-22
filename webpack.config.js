@@ -9,6 +9,9 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 var Visualizer = require('webpack-visualizer-plugin');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
+var px2rem = require('postcss-px2rem');
 
 const DEVELOPMENT_PORT = 3007;
 const SOURCE_PATH = 'src';
@@ -32,8 +35,7 @@ const uglifyJsOptions = {
 
 // default webpack config
 let webpackConfig = {
-    entry: {
-    },
+    entry: {},
     output: {
         path: path.resolve(__dirname, `${RELEASE_PATH}`),
         filename: 'js/[name].js'
@@ -49,11 +51,11 @@ let webpackConfig = {
             },
             {
                 test: /\.css$/,
-                loader: 'style!css?strictMath&noIeCompat!',
+                loader: 'style!css?strictMath&noIeCompat!postcss',
             },
             {
                 test: /\.less$/,
-                loader: 'style!css!less'
+                loader: 'style!css!postcss!less'
             },
             {
                 test: /\.json$/,
@@ -69,7 +71,13 @@ let webpackConfig = {
         new Visualizer({
             filename: './stats.html'
         }),
-    ]
+    ],
+    postcss: function () {
+        return [autoprefixer, precss, px2rem({
+            rootValue: 200,
+            remUnit: 75,
+        })];
+    }
 };
 
 // get entry
@@ -137,7 +145,7 @@ switch (NODE_ENV) {
             `./${SOURCE_PATH}/library/BindReact`,
             `./${SOURCE_PATH}/library/createReducer`,
         ];
-        
+
         webpackConfig.devtool = 'source-map';
 
         webpackConfig.module.loaders[1].loader = ExtractTextPlugin.extract("style-loader", "css-loader?-url");
@@ -156,7 +164,7 @@ switch (NODE_ENV) {
             filename: 'js/[name].js'
         }));
         webpackConfig.plugins.push(new ExtractTextPlugin(path.join('css/[name].css')));
-        
+
         break;
     default:
         throw new Error('NODE_ENV not found, NODE_ENV=' + NODE_ENV);
