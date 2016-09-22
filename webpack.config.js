@@ -149,8 +149,8 @@ switch (NODE_ENV) {
 
         webpackConfig.devtool = 'source-map';
 
-        webpackConfig.module.loaders[1].loader = ExtractTextPlugin.extract("style-loader", "css-loader?-url");
-        webpackConfig.module.loaders[2].loader = ExtractTextPlugin.extract("style-loader", "css-loader!less-loader?-url");
+        webpackConfig.module.loaders[1].loader = ExtractTextPlugin.extract('style', 'css?-url!postcss');
+        webpackConfig.module.loaders[2].loader = ExtractTextPlugin.extract('style', 'css!postcss!less?-url');
         webpackConfig.module.loaders[4].loader = 'url-loader?limit=8196&name=css/[path]/[name]-[hash].[ext]';
 
         webpackConfig.plugins.push(new webpack.DefinePlugin({

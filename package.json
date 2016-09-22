@@ -1,5 +1,5 @@
 {
-  "name": "antd-mobile-scaffold",
+  "name": "slark",
   "version": "1.0.0",
   "description": "antd mobile scaffold",
   "main": "webpack.config.js",
@@ -7,7 +7,7 @@
     "dev": "NODE_ENV=development webpack-dev-server --progress",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rm -rf ./dist && mkdir ./dist",
-    "build:webpack": "webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude > ./release/build.log"
+    "build:webpack": "webpack --progress --display-chunks --display-reasons --display-error-details --display-modules --display-exclude > ./dist/build.log"
   },
   "author": "wheatma",
   "license": "MIT",
