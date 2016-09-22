@@ -1,2 +1,2 @@
 # slark
-antd mobile scanffold
+antd mobile scanfold
