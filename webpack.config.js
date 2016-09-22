@@ -11,7 +11,7 @@ var UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 var Visualizer = require('webpack-visualizer-plugin');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
-var px2rem = require('postcss-px2rem');
+var pxtorem = require('postcss-pxtorem');
 
 const DEVELOPMENT_PORT = 3007;
 const SOURCE_PATH = 'src';
@@ -73,9 +73,10 @@ let webpackConfig = {
         }),
     ],
     postcss: function () {
-        return [autoprefixer, precss, px2rem({
-            rootValue: 200,
-            remUnit: 75,
+        return [autoprefixer, precss, pxtorem({
+          rootValue: 100,
+          propWhiteList: [],
+          selectorBlackList: [/^html$/, /^\.ant-/, /^\.github-/, /^\.gh-/],
         })];
     }
 };
