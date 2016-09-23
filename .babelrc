@@ -5,6 +5,8 @@
         "stage-0",
     ],
     "plugins": [
+        "transform-function-bind",
+        "transform-class-properties",
         "transform-decorators-legacy",
         ["antd", [{ "libraryName": "antd-mobile", "style": true }]]
     ]
